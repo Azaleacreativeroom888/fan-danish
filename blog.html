@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Blog — Tegneserie</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Raleway:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --cream:      #F5F0E8;
+      --sand:       #E8DFD0;
+      --clay:       #C8B89A;
+      --terracotta: #B5714A;
+      --forest:     #2C3E2D;
+      --ink:        #1A1A18;
+      --mist:       #6B7B6C;
+      --warm-white: #FAF7F2;
+    }
+
+    body {
+      background: var(--cream);
+      color: var(--ink);
+      font-family: 'Raleway', sans-serif;
+      font-weight: 400;
+      line-height: 1.7;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.4rem 4rem;
+      background: rgba(245, 240, 232, 0.88);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(200, 184, 154, 0.3);
+    }
+
+    .nav-logo {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.5rem;
+      color: var(--forest);
+      text-decoration: none;
+    }
+    .nav-logo span { color: var(--terracotta); }
+
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+      list-style: none;
+    }
+    .nav-links a {
+      font-weight: 500;
+      font-size: 0.8rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--ink);
+      text-decoration: none;
+      opacity: 0.7;
+      transition: opacity 0.2s, color 0.2s;
+    }
+    .nav-links a:hover,
+    .nav-links a.active { opacity: 1; color: var(--terracotta); }
+
+    /* PAGE HEADER */
+    .page-header {
+      padding: 9rem 5rem 3rem;
+      border-bottom: 1px solid var(--clay);
+    }
+
+    .page-header p {
+      font-size: 0.72rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--terracotta);
+      font-weight: 600;
+      margin-bottom: 0.6rem;
+    }
+
+    .page-header h1 {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(2.4rem, 4vw, 3.6rem);
+      color: var(--forest);
+      line-height: 1.1;
+    }
+
+    /* DIARY */
+    .diary {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 4rem 2rem 8rem;
+    }
+
+    .entry {
+      display: grid;
+      grid-template-columns: 9rem 1fr;
+      gap: 0 3rem;
+      padding: 2.2rem 0;
+      border-bottom: 1px solid rgba(200, 184, 154, 0.4);
+    }
+
+    .entry:last-child {
+      border-bottom: none;
+    }
+
+    .entry-date {
+      padding-top: 0.1rem;
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+      color: var(--mist);
+      font-weight: 500;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    .entry-text {
+      font-size: 0.95rem;
+      color: var(--ink);
+      font-weight: 300;
+      line-height: 1.9;
+    }
+
+    /* FOOTER */
+    footer {
+      background: var(--ink);
+      color: rgba(250, 247, 242, 0.5);
+      padding: 3rem 5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 0.78rem;
+    }
+
+    .footer-logo {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.3rem;
+      color: var(--warm-white);
+      text-decoration: none;
+    }
+    .footer-logo span { color: var(--terracotta); }
+
+    .footer-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+    .footer-links a {
+      color: rgba(250, 247, 242, 0.45);
+      text-decoration: none;
+      font-size: 0.75rem;
+      letter-spacing: 0.08em;
+      transition: color 0.2s;
+    }
+    .footer-links a:hover { color: var(--warm-white); }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="index.html" class="nav-logo">Tegne<span>serie</span></a>
+    <ul class="nav-links">
+      <li><a href="gallery.html">Galleri</a></li>
+      <li><a href="translation.html">Oversættelse</a></li>
+      <li><a href="blog.html" class="active">Blog</a></li>
+      <li><a href="contact.html">Kontakt</a></li>
+    </ul>
+  </nav>
+
+  <div class="page-header">
+    <p>Dagbog</p>
+    <h1>Blog</h1>
+  </div>
+
+  <main class="diary">
+
+    <div class="entry">
+      <div class="entry-date">15. nov 2024</div>
+      <div class="entry-text">Arbejdede på oversættelsen af bind 23 i dag. Nogle sætninger er virkelig svære at gengive på dansk uden at miste rytmen i originalen. Tog en pause og læste lidt Tezuka for inspiration.</div>
+    </div>
+
+    <div class="entry">
+      <div class="entry-date">2. nov 2024</div>
+      <div class="entry-text">Uploadede tre nye sider til galleriet. Jeg er ikke helt tilfreds med skyggerne i panel fire, men det må vente. Nogle gange er "færdig" bedre end "perfekt".</div>
+    </div>
+
+    <div class="entry">
+      <div class="entry-date">18. okt 2024</div>
+      <div class="entry-text">Startede på en ny original korthistorie. Kun fem sider, men idéen har ligget og ventet længe. Det føles godt endelig at få den ud af hovedet og ned på papir.</div>
+    </div>
+
+    <div class="entry">
+      <div class="entry-date">5. okt 2024</div>
+      <div class="entry-text">Fik en besked fra en læser i Aarhus som takkede for oversættelsen. Det er de øjeblikke der minder mig om, hvorfor jeg gør dette.</div>
+    </div>
+
+    <div class="entry">
+      <div class="entry-date">22. sep 2024</div>
+      <div class="entry-text">Redesignede forsiden lidt. Prøver at holde alt så rent og enkelt som muligt — ligesom de ting jeg elsker ved skandinavisk design generelt.</div>
+    </div>
+
+  </main>
+
+  <footer>
+    <a href="index.html" class="footer-logo">Tegne<span>serie</span></a>
+    <ul class="footer-links">
+      <li><a href="gallery.html">Galleri</a></li>
+      <li><a href="translation.html">Oversættelseslog</a></li>
+      <li><a href="blog.html">Blog</a></li>
+      <li><a href="contact.html">Kontakt</a></li>
+    </ul>
+    <p>© 2024 Tegneserie</p>
+  </footer>
+
+</body>
+</html>
