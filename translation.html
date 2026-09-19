@@ -6,7 +6,7 @@
   <title>Oversættelseslog — Tegneserie</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Libre+Baskerville:ital,wght@0,400;1,400&family=Raleway:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Raleway:wght@300;400;500;600&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -43,7 +43,6 @@
       backdrop-filter: blur(10px);
       border-bottom: 1px solid rgba(200, 184, 154, 0.3);
     }
-
     .nav-logo {
       font-family: 'DM Serif Display', serif;
       font-size: 1.5rem;
@@ -51,12 +50,7 @@
       text-decoration: none;
     }
     .nav-logo span { color: var(--terracotta); }
-
-    .nav-links {
-      display: flex;
-      gap: 2.5rem;
-      list-style: none;
-    }
+    .nav-links { display: flex; gap: 2.5rem; list-style: none; }
     .nav-links a {
       font-weight: 500;
       font-size: 0.8rem;
@@ -75,7 +69,6 @@
       padding: 9rem 5rem 3rem;
       border-bottom: 1px solid var(--clay);
     }
-
     .page-header p {
       font-size: 0.72rem;
       letter-spacing: 0.2em;
@@ -84,7 +77,6 @@
       font-weight: 600;
       margin-bottom: 0.6rem;
     }
-
     .page-header h1 {
       font-family: 'DM Serif Display', serif;
       font-size: clamp(2.4rem, 4vw, 3.6rem);
@@ -92,100 +84,224 @@
       line-height: 1.1;
     }
 
-    /* LOG CONTAINER */
-    .log {
-      max-width: 780px;
-      margin: 0 auto;
-      padding: 4rem 2rem 8rem;
+    /* LAYOUT */
+    .layout {
+      max-width: 1040px;
+      margin: 3.5rem auto 8rem;
+      padding: 0 2rem;
       display: flex;
-      flex-direction: column;
-      gap: 1.5px;
+      gap: 2.5rem;
+      align-items: flex-start;
     }
+    .main-col  { flex: 3; min-width: 0; }
+    .sidebar-col { flex: 1; min-width: 180px; }
 
-    /* ENTRY CARD */
-    .entry {
+    /* SIDEBAR */
+    .sidebar-block {
       background: var(--warm-white);
       border-left: 3px solid var(--forest);
-      overflow: hidden;
-      animation: fadeUp 0.4s ease both;
+      padding: 1.4rem 1.5rem;
+      margin-bottom: 1.4rem;
+      position: sticky;
+      top: 6rem;
     }
-
-    .entry:nth-child(1){animation-delay:0.05s}
-    .entry:nth-child(2){animation-delay:0.1s}
-    .entry:nth-child(3){animation-delay:0.15s}
-    .entry:nth-child(4){animation-delay:0.2s}
-    .entry:nth-child(5){animation-delay:0.25s}
-
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(16px); }
-      to   { opacity: 1; transform: translateY(0); }
+    .sidebar-block h3 {
+      font-size: 0.65rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--terracotta);
+      margin-bottom: 1rem;
+      padding-bottom: 0.6rem;
+      border-bottom: 1px solid var(--sand);
     }
-
-    .entry-header {
+    .sidebar-link {
       display: flex;
       align-items: center;
-      justify-content: space-between;
-      padding: 1rem 1.5rem;
+      gap: 0.5rem;
+      text-decoration: none;
+      color: var(--ink);
+      font-size: 0.82rem;
+      font-weight: 500;
+      padding: 0.55rem 0;
       border-bottom: 1px solid var(--sand);
+      transition: color 0.2s, padding-left 0.2s;
+    }
+    .sidebar-link:last-child { border-bottom: none; }
+    .sidebar-link::before {
+      content: '›';
+      color: var(--terracotta);
+      font-size: 1rem;
+      line-height: 1;
+    }
+    .sidebar-link:hover { color: var(--terracotta); padding-left: 0.4rem; }
+
+    /* NOTE CARD */
+    .note-card {
+      background: var(--warm-white);
+      border-left: 3px solid var(--forest);
+      margin-bottom: 1.5px;
+      overflow: hidden;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+    .note-card.revealed { opacity: 1; transform: none; }
+
+    /* CARD HEADER (original text) */
+    .note-header {
+      background: var(--forest);
+      color: var(--warm-white);
+      padding: 1.1rem 1.6rem;
+      display: flex;
+      align-items: flex-start;
       gap: 1rem;
     }
-
-    .entry-title {
+    .note-number {
+      background: var(--terracotta);
+      color: var(--warm-white);
       font-family: 'DM Serif Display', serif;
-      font-size: 1.15rem;
-      color: var(--forest);
-      line-height: 1.2;
-    }
-
-    .entry-tag {
+      font-size: 0.8rem;
+      width: 28px;
+      height: 28px;
       flex-shrink: 0;
-      font-size: 0.65rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .note-original {
+      font-size: 1rem;
+      line-height: 1.6;
+      font-style: italic;
+    }
+    .note-original small {
+      display: block;
+      font-style: normal;
+      font-size: 0.68rem;
       font-weight: 600;
       letter-spacing: 0.15em;
       text-transform: uppercase;
-      color: var(--terracotta);
-      border: 1px solid var(--clay);
-      padding: 0.25rem 0.7rem;
+      opacity: 0.55;
+      margin-top: 0.25rem;
     }
 
-    /* SECTIONS */
-    .section {
-      padding: 1rem 1.5rem;
-      border-bottom: 1px dashed rgba(200,184,154,0.5);
-      font-size: 0.9rem;
-      color: var(--ink);
-      font-weight: 300;
-      line-height: 1.85;
+    /* TRANSLATION BAND */
+    .note-translation {
+      background: var(--terracotta);
+      color: var(--warm-white);
+      padding: 0.85rem 1.6rem 0.85rem 3.8rem;
+      font-size: 0.95rem;
+      font-style: italic;
+      line-height: 1.6;
+      border-top: 2px solid var(--rust);
+      border-bottom: 2px solid var(--rust);
+      position: relative;
+    }
+    .note-translation::before {
+      content: '訳';
+      position: absolute;
+      left: 1.4rem;
+      top: 50%;
+      transform: translateY(-50%);
+      font-family: 'DM Serif Display', serif;
+      font-size: 1rem;
+      font-style: normal;
+      opacity: 0.7;
     }
 
-    .section:last-child { border-bottom: none; }
+    /* TOGGLE BUTTON */
+    .toggle-btn {
+      background: none;
+      border: none;
+      color: var(--mist);
+      cursor: pointer;
+      font-family: 'Raleway', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.75rem 1.6rem;
+      width: 100%;
+      text-align: left;
+      border-top: 1px solid var(--sand);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: background 0.15s, color 0.15s;
+    }
+    .toggle-btn:hover { background: var(--sand); color: var(--forest); }
+    .toggle-btn .arrow { margin-left: auto; font-size: 0.65rem; }
 
-    .section-label {
+    /* BREAKDOWN BODY */
+    .note-body { display: none; padding: 1.4rem 1.6rem; }
+    .note-body.open { display: block; }
+
+    .breakdown-title {
       font-size: 0.65rem;
       font-weight: 600;
-      letter-spacing: 0.18em;
+      letter-spacing: 0.2em;
       text-transform: uppercase;
-      color: var(--mist);
-      margin-bottom: 0.5rem;
+      color: var(--terracotta);
+      margin-bottom: 1rem;
+      padding-bottom: 0.4rem;
+      border-bottom: 1px solid var(--sand);
     }
 
-    .section p + p { margin-top: 0.5rem; }
-
-    .section strong { color: var(--terracotta); font-weight: 600; }
+    /* WORD ROW */
+    .word-row {
+      display: grid;
+      grid-template-columns: 160px 1fr;
+      gap: 0.4rem 1.2rem;
+      margin-bottom: 0.85rem;
+      align-items: start;
+    }
+    .word-row + .word-row {
+      border-top: 1px dashed rgba(200,184,154,0.5);
+      padding-top: 0.85rem;
+    }
+    .word-key {
+      font-family: 'DM Serif Display', serif;
+      font-size: 0.95rem;
+      color: var(--terracotta);
+      line-height: 1.5;
+      padding-top: 2px;
+    }
+    .word-val {
+      font-size: 0.88rem;
+      line-height: 1.8;
+      color: var(--ink);
+      font-weight: 300;
+    }
+    .word-val .ref {
+      font-style: italic;
+      opacity: 0.6;
+      font-size: 0.82rem;
+    }
+    .tag {
+      display: inline-block;
+      background: var(--sand);
+      color: var(--rust);
+      border-radius: 2px;
+      font-size: 0.65rem;
+      font-weight: 700;
+      padding: 1px 6px;
+      margin-left: 4px;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      vertical-align: middle;
+    }
 
     /* MEMO section */
-    .section.memo {
+    .note-memo {
       background: var(--sand);
-    }
-
-    .section.memo .section-label {
-      color: var(--rust);
-    }
-
-    .section.memo p {
+      border-top: 1px solid var(--clay);
+      padding: 1rem 1.6rem;
       font-size: 0.85rem;
-      color: #5a3a20;
+      font-weight: 300;
+      color: var(--rust);
+      line-height: 1.85;
     }
+    .note-memo strong { color: var(--terracotta); font-weight: 600; }
 
     /* FOOTER */
     footer {
@@ -197,7 +313,6 @@
       justify-content: space-between;
       font-size: 0.78rem;
     }
-
     .footer-logo {
       font-family: 'DM Serif Display', serif;
       font-size: 1.3rem;
@@ -205,12 +320,7 @@
       text-decoration: none;
     }
     .footer-logo span { color: var(--terracotta); }
-
-    .footer-links {
-      display: flex;
-      gap: 2rem;
-      list-style: none;
-    }
+    .footer-links { display: flex; gap: 2rem; list-style: none; }
     .footer-links a {
       color: rgba(250, 247, 242, 0.45);
       text-decoration: none;
@@ -219,6 +329,13 @@
       transition: color 0.2s;
     }
     .footer-links a:hover { color: var(--warm-white); }
+
+    @media (max-width: 760px) {
+      .layout { flex-direction: column; }
+      .sidebar-col { width: 100%; }
+      .sidebar-block { position: static; }
+      .word-row { grid-template-columns: 1fr; gap: 0.2rem; }
+    }
   </style>
 </head>
 <body>
@@ -238,88 +355,183 @@
     <h1>Translation Log</h1>
   </div>
 
-  <main class="log">
+  <div class="layout">
 
-    <!-- Entry 1 -->
-    <div class="entry">
-      <div class="entry-header">
-        <div class="entry-title">pseudo-famous</div>
-        <span class="entry-tag">英語表現</span>
-      </div>
-      <div class="section">
-        <div class="section-label">記事</div>
-        <p>Smartlessというポッドキャストで「pseudo-famous」と言っていた。「疑似的に有名、なんとなく有名」という意味。</p>
-        <p>「pseudo」＝偽の、いかさまの。最近は「ネットでしか有名じゃない」というニュアンスで使われることが多い。pseudonymは「ペンネーム」のように使われる。</p>
-      </div>
-    </div>
+    <!-- MAIN -->
+    <div class="main-col">
 
-    <!-- Entry 2 -->
-    <div class="entry">
-      <div class="entry-header">
-        <div class="entry-title">Thank you.</div>
-        <span class="entry-tag">英語表現</span>
+      <!-- Entry ★ -->
+      <div class="note-card">
+        <div class="note-header">
+          <div class="note-number">★</div>
+          <div class="note-original">
+            Time. How it passes, from moment to moment. Haven't you ever noticed how some things change when you aren't looking at them?
+            <small>小説翻訳 · ムラサキキリンのチャーリーは様子が変 / デイヴィッド・D・レヴァイン</small>
+          </div>
+        </div>
+        <div class="note-translation">
+          時間だ。時間が瞬間から瞬間へと、どう過ぎていくのか。見ていない隙になにかが変わることに気が付いたことはないか？
+        </div>
+        <button class="toggle-btn" onclick="toggleNote(this)">
+          分析を見る <span class="arrow">▼</span>
+        </button>
+        <div class="note-body">
+          <div class="breakdown-title">判断メモ</div>
+          <div class="word-row">
+            <div class="word-key">moment to moment</div>
+            <div class="word-val">「刻一刻」ではなく<strong>「瞬間から瞬間へ」</strong>が正確。この話では"瞬間"は区切られたもの（漫画内の世界）なので刻一刻は合わない。</div>
+          </div>
+          <div class="word-row">
+            <div class="word-key">change</div>
+            <div class="word-val">過去形ではない。「変わる」のままでよい——ケアレスミス注意。</div>
+          </div>
+        </div>
       </div>
-      <div class="section">
-        <div class="section-label">記事</div>
-        <p>アメリカ英語では「Thank you.」が皮肉になることがよくある。「教えてくれてありがとう」と言いながら「最初から知ってた」という意味を込めたり、会話の終了シグナルとして機能することもある。</p>
-        <p>感謝より <strong>acknowledgement（承認）</strong> を示す方が実質的な敬意に近い、という感覚がある。</p>
-      </div>
-    </div>
 
-    <!-- Entry 3 -->
-    <div class="entry">
-      <div class="entry-header">
-        <div class="entry-title">「このセリフどう訳す問題」</div>
-        <span class="entry-tag">翻訳</span>
+      <!-- Entry 1 -->
+      <div class="note-card">
+        <div class="note-header">
+          <div class="note-number">1</div>
+          <div class="note-original">
+            「よし！河童を捕まえて一攫千金目指すぞ！」
+            <small>英→日 翻訳練習 · オリジナル台詞</small>
+          </div>
+        </div>
+        <div class="note-translation">
+          "Right! I'll catch a kappa and make a fortune all at once!"
+        </div>
+        <button class="toggle-btn" onclick="toggleNote(this)">
+          分析を見る <span class="arrow">▼</span>
+        </button>
+        <div class="note-body">
+          <div class="breakdown-title">語句の分析</div>
+          <div class="word-row">
+            <div class="word-key">よし！</div>
+            <div class="word-val">"Right!" / "Alright!" が自然。"Okay!" はやや弱い。<span class="tag">感動詞</span></div>
+          </div>
+          <div class="word-row">
+            <div class="word-key">一攫千金</div>
+            <div class="word-val">"make a fortune all at once" が慣用的。"get rich quick" もあるが、一瞬のチャンスを狙うニュアンスは "all at once" の方が近い。</div>
+          </div>
+          <div class="word-row">
+            <div class="word-key">河童</div>
+            <div class="word-val">文化由来のため "kappa" をそのまま使用。必要なら <span class="ref">a legendary Japanese creature</span> と注記可能。</div>
+          </div>
+        </div>
       </div>
-      <div class="section">
-        <div class="section-label">原文（ムラサキキリンのチャーリーは様子が変 / デイヴィッド・D・レヴァイン）</div>
-        <p>Time. How it passes, from moment to moment. Haven't you ever noticed how some things change when you aren't looking at them?</p>
-      </div>
-      <div class="section">
-        <div class="section-label">翻訳（修正後）</div>
-        <p>時間だ。時間が瞬間から瞬間へと、どう過ぎていくのか。見ていない隙になにかが変わることに気が付いたことはないか？</p>
-      </div>
-      <div class="section memo">
-        <div class="section-label">判断メモ</div>
-        <p>「moment to moment」は「刻一刻」ではなく<strong>「瞬間から瞬間へ」</strong>が正確。この話では"瞬間"は区切られたもの（漫画内の世界）。changeは過去形ではない——ケアレスミス。</p>
-      </div>
-    </div>
 
-    <!-- Entry 4 -->
-    <div class="entry">
-      <div class="entry-header">
-        <div class="entry-title">「このセリフどう訳す問題」</div>
-        <span class="entry-tag">翻訳</span>
+      <!-- Entry 2 -->
+      <div class="note-card">
+        <div class="note-header">
+          <div class="note-number">2</div>
+          <div class="note-original">
+            pseudo-famous
+            <small>英語表現 · Smartless ポッドキャストより</small>
+          </div>
+        </div>
+        <div class="note-translation">
+          疑似的に有名、なんとなく有名
+        </div>
+        <button class="toggle-btn" onclick="toggleNote(this)">
+          分析を見る <span class="arrow">▼</span>
+        </button>
+        <div class="note-body">
+          <div class="breakdown-title">語句の分析</div>
+          <div class="word-row">
+            <div class="word-key">pseudo-</div>
+            <div class="word-val">「偽の・いかさまの」という接頭辞。<span class="tag">接頭辞</span><br><span class="ref">pseudonym = ペンネーム</span></div>
+          </div>
+          <div class="word-row">
+            <div class="word-key">使われ方</div>
+            <div class="word-val">最近は「ネットでしか有名じゃない」というニュアンスで使われることが多い。日本語で言うと「プチ有名」に近い感覚。</div>
+          </div>
+        </div>
       </div>
-      <div class="section">
-        <div class="section-label">原文</div>
-        <p>The protagonist kept drawing, even when no one believed in her story.</p>
-      </div>
-      <div class="section">
-        <div class="section-label">翻訳（修正後）</div>
-        <p>誰も主人公のストーリーを信じていなかったのに、それでも彼女は描き続けた。</p>
-      </div>
-      <div class="section memo">
-        <div class="section-label">判断メモ</div>
-        <p><strong>「even when」＝「それでも」</strong>がこの文の軸。「〜のに、彼女は〜した」という対比構造を日本語でも活かすのがポイント。</p>
-      </div>
-    </div>
 
-    <!-- Entry 5 -->
-    <div class="entry">
-      <div class="entry-header">
-        <div class="entry-title">stigma</div>
-        <span class="entry-tag">英単語</span>
+      <!-- Entry 3 -->
+      <div class="note-card">
+        <div class="note-header">
+          <div class="note-number">3</div>
+          <div class="note-original">
+            "Thank you."
+            <small>英語表現 · アメリカ英語のニュアンス</small>
+          </div>
+        </div>
+        <div class="note-translation">
+          （皮肉・会話終了シグナルとしての）ありがとう
+        </div>
+        <button class="toggle-btn" onclick="toggleNote(this)">
+          分析を見る <span class="arrow">▼</span>
+        </button>
+        <div class="note-body">
+          <div class="breakdown-title">語句の分析</div>
+          <div class="word-row">
+            <div class="word-key">皮肉用法</div>
+            <div class="word-val">「最初から知ってた、なんで今更言うの」というニュアンスで使われる。会話の終了シグナルとしても機能する。</div>
+          </div>
+          <div class="word-row">
+            <div class="word-key">代替表現</div>
+            <div class="word-val">"I'll try that." や "You have a better idea." など、<strong>相手が正しいことを言葉にする</strong>方が感謝に近いことがある。<span class="tag">acknowledgement</span></div>
+          </div>
+        </div>
+        <div class="note-memo">
+          英語圏では <strong>acknowledgement（承認）</strong> を示すことが、感謝の実質的な代替になっている場合がある。
+        </div>
       </div>
-      <div class="section">
-        <div class="section-label">記事</div>
-        <p>「ある特徴や立場に対して、社会が"悪いもの・恥ずかしいもの"として貼るマイナスの印象」。</p>
-        <p>social stigma（社会的偏見）　／　the stigma around mental illness（精神疾患をめぐる偏見）</p>
-      </div>
-    </div>
 
-  </main>
+      <!-- Entry 4 -->
+      <div class="note-card">
+        <div class="note-header">
+          <div class="note-number">4</div>
+          <div class="note-original">
+            Solipsistic delusions are frequently merely the initial manifestation of a general insensitivity to legitimacy.
+            <small>小説翻訳 · ムラサキキリンのチャーリーは様子が変 / デイヴィッド・D・レヴァイン</small>
+          </div>
+        </div>
+        <div class="note-translation">
+          独我論的妄想は、しばしば他者の人格の正当性への全般的鈍感さの単なる初期症状とみなされています。
+        </div>
+        <button class="toggle-btn" onclick="toggleNote(this)">
+          分析を見る <span class="arrow">▼</span>
+        </button>
+        <div class="note-body">
+          <div class="breakdown-title">判断メモ</div>
+          <div class="word-row">
+            <div class="word-key">solipsistic</div>
+            <div class="word-val">「唯我的」より<strong>「独我的」</strong>が正確。自我とその所産だけが実在するという立場を指す。「唯我的」は自己中心的な態度になってしまう。</div>
+          </div>
+          <div class="word-row">
+            <div class="word-key">initial manifestation</div>
+            <div class="word-val">「初期症状」。<span class="ref">manifestation = 症状・表れ</span></div>
+          </div>
+          <div class="word-row">
+            <div class="word-key">general</div>
+            <div class="word-val">「全般的な」（ある事柄の全体に及ぶさま）に落ち着いたが、まだ少し引っかかりがある。要再考。</div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /main-col -->
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar-col">
+      <div class="sidebar-block">
+        <h3>📂 メニュー</h3>
+        <a class="sidebar-link" href="grammar.html">文法ノート</a>
+        <a class="sidebar-link" href="novel.html">小説翻訳</a>
+        <a class="sidebar-link" href="studyblog.html">勉強のひとことブログ</a>
+        <a class="sidebar-link" href="dictionary.html">辞書</a>
+      </div>
+      <div class="sidebar-block">
+        <h3>タグ</h3>
+        <a class="sidebar-link" href="#">英語表現</a>
+        <a class="sidebar-link" href="#">小説翻訳</a>
+        <a class="sidebar-link" href="#">英→日</a>
+        <a class="sidebar-link" href="#">判断メモ</a>
+      </div>
+    </aside>
+
+  </div><!-- /layout -->
 
   <footer>
     <a href="index.html" class="footer-logo">Tegne<span>serie</span></a>
@@ -331,6 +543,20 @@
     </ul>
     <p>© 2024 Tegneserie</p>
   </footer>
+
+  <script>
+    function toggleNote(btn) {
+      const body = btn.nextElementSibling;
+      body.classList.toggle('open');
+      btn.querySelector('.arrow').textContent = body.classList.contains('open') ? '▲' : '▼';
+      btn.querySelector('span:first-child').textContent = body.classList.contains('open') ? '分析を閉じる' : '分析を見る';
+    }
+
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('revealed'); });
+    }, { threshold: 0.08 });
+    document.querySelectorAll('.note-card').forEach(el => observer.observe(el));
+  </script>
 
 </body>
 </html>
